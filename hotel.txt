@@ -1,0 +1,20 @@
+class : 
+hotel : 
+nom , etoiles, ville , adresse , nombre de chambres,
+ nombre de chambres reservées,
+chambres dispos .
+
+
+afficherHotel() ( affiche ses infos ) 
+réservations() ( affiche les reservations ) 
+
+
+class: Client :
+nom , prenom 
+
+
+
+
+
+class chambre : 
+hotel dans le quel elle sont , nombre de lit , boolean wifi , prix 

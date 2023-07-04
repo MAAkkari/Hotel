@@ -32,14 +32,14 @@ class Client{
     }   
     //affiche les reservations du client, et affiche le prix total en utilisant calcul_Prix();
     public function Reservations(){
-        echo "Réservations de $this <br>".count($this->_reservations)." RESERVATIONS";
+        $retour= "Réservations de $this <br>".count($this->_reservations)." RESERVATIONS";
         $total=0;
         foreach($this->_reservations as $reservation){
-            echo "<br> Hotel : ".$reservation->getChambre()->getHotel()." / ".
+            $retour.= "<br> Hotel : ".$reservation->getChambre()->getHotel()." / ".
             $reservation->getChambre()." du ".$reservation->getDebut()." au ".$reservation->getFin();
             $total+=$reservation->calcul_Prix();
         }
-        echo "<br>Total : $total € <br><br><br>";
+        return $retour.= "<br>Total : $total € <br><br><br>";
     }
         
 }

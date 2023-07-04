@@ -57,7 +57,7 @@ class Hotel{
     }
 
     public function Info(){
-        echo "$this <br> $this->_adresse <br> Nombre de chambres : ".count($this->_chambres).
+        $resultat= "$this <br> $this->_adresse <br> Nombre de chambres : ".count($this->_chambres).
         "<br> Nombre de chambres réservées : "; 
         $result=0;
          foreach($this->_chambres as $chambre){
@@ -65,12 +65,12 @@ class Hotel{
                 $result+=1;
             }
         }
-        echo $result;
-        echo"<br> Nombre de chambres dispo : ".count($this->_chambres)-$result."<br><br><br>";
+        $resultat.= $result;
+        return $resultat.="<br> Nombre de chambres dispo : ".count($this->_chambres)-$result."<br><br><br>";
     }
         
     public function Reservations(){
-        echo "Réservations de l'hôtel $this<br>";
+        $retour= "Réservations de l'hôtel $this<br>";
         $result=0;
         foreach($this->_chambres as $chambre){
             if(count($chambre->getReservations())>0){
@@ -79,42 +79,42 @@ class Hotel{
                 $resultat=0;
             foreach($this->_chambres as $chambre){
                 $resultat+=count($chambre->getReservations());}
-            echo "$resultat RESERVATIONS";
+                $retour.= "$resultat RESERVATIONS";
             foreach($this->_chambres as $chambre){
                 foreach($chambre->getReservations() as $reservation){
-                    echo "<br>".$reservation;
+                    $retour.= "<br>".$reservation;
                 }
             }   
         }
         else{ 
-            echo"Aucune Réservation !<br><br><br>";
+            $retour.="Aucune Réservation !";
         }
-        echo"<br><br><br>";
+        return $retour.="<br><br><br>";
     }   
     public function statuts(){
-        echo"Statuts des chambres de $this <br>";
-        echo "<table border='0'><tr><th>CHAMBRE</th><th>PRIX</th><th>WiFi</th><th>Etat</th></tr>";
+        $resultat="Statuts des chambres de $this <br>";
+        $resultat.= "<table id='status' border='0'><tr><th>CHAMBRE</th><th>PRIX</th><th>WiFi</th><th>Etat</th></tr>";
         foreach($this->_chambres as $chambre){
-            echo"<tr>
+            $resultat.="<tr>
                 <td>"."Chambre ".$chambre->getNumero()."</td>
                 <td>".$chambre->getPrix()."</td>
                 <td>";
                 if ($chambre->getWifi()) {
-                    echo '<div class="ouiFi">icone pas encore implementé</div>';
+                    $resultat.= '<div class="ouiFi">icone pas encore implementé</div>';
                 } else {
-                    echo '';
+                    $resultat.= '';
                 }
-                echo"</td>
+                $resultat.="</td>
                 <td>";
                 if (count($chambre->getReservations())<1) {
-                    echo '<div class="dispo">DISPONIBLE</div>';
+                    $resultat.= '<div class="dispo">DISPONIBLE</div>';
                 } else {
-                    echo '<div class="indispo">RESERVE</div>';
+                    $resultat.= '<div class="indispo">RESERVE</div>';
                 }
-                echo "</td>
+                $resultat.= "</td>
                 </tr>";
         }
-        echo"</table> <br><br><br>";
+        return $resultat.="</table> <br><br><br>";
         
     }
 }
